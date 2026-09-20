@@ -1,0 +1,26 @@
+# --- S32 Design Studio / Eclipse Build Artifacts ---
+Debug/
+Release/
+*.elf
+*.hex
+*.bin
+*.map
+*.o
+*.d
+*.args
+
+# --- IDE Local Configurations (User Specific) ---
+.settings/
+.metadata/
+RemoteSystemsTempFiles/
+*.launch
+.launch/
+
+# --- VS Code specific (if using VS Code extensions) ---
+.vscode/ipch/
+.vscode/.cmw/
+.vscode/browse.vc.db
+
+# --- OS temporary files ---
+.DS_Store
+Thumbs.db
