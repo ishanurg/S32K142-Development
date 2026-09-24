@@ -13,7 +13,9 @@
 
 #include "gpio.h"
 
-
+#define DEMCR      (*(volatile uint32_t *)0xE000EDFC)
+#define DWT_CTRL   (*(volatile uint32_t *)0xE0001000)
+#define DWT_CYCCNT (*(volatile uint32_t *)0xE0001004)
 typedef enum {
 
     SYS_CLK_48MHZ_FIRC,
@@ -46,7 +48,8 @@ void Clock_InitSystem(SystemClockSpeed_t speed);
 
 void Clock_EnablePort(Port_t port);
 
-
+void Start_Stopwatch(void);
+uint32_t Read_Stopwatch(void);
 void Clock_EnablePeripheral(Peripheral_t peri);
 
 

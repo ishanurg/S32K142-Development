@@ -38,7 +38,17 @@ void Clock_InitSystem(SystemClockSpeed_t speed) {
     }
 }
 
+void Start_Stopwatch(void){
+	DEMCR |= (1<<24);
+	DWT_CYCCNT = 0;
+	DWT_CTRL |= 1;
 
+
+}
+uint32_t Read_Stopwatch(void){
+	return DWT_CYCCNT;
+
+}
 void Clock_EnablePort(Port_t port) {
     // Ports do not have a clock source selection (PCS), only an ON/OFF switch (CGC)
     switch(port) {

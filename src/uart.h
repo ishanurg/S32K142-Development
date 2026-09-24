@@ -5,8 +5,8 @@
  *      Author: ishan
  */
 
-#ifndef S32K142_UART_H_
-#define S32K142_UART_H_
+#ifndef UART_H_
+#define UART_H_
 #include "S32K142.h"
 #include <stdint.h>
 #include <stdbool.h>
@@ -37,5 +37,5 @@ void UART_PrintInt(int32_t num);
 // Print a decimal number with a specific number of decimal places
 void UART_PrintFloat(float num, uint8_t decimal_places);
 
-
-#endif /* S32K142_UART_H_ */
+void UART_Print_DMA(const char *str, uint16_t length, uint8_t dma_channel);
+#endif /* UART_H_ */

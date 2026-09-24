@@ -1,46 +1,45 @@
 #include "S32K142.h"
 #include "clock.h"
 #include "gpio.h"
-#include "S32K142_uart.h"
-#include "spi.h"
+#include "uart.h"
+#include "adc.h"
+#define VREF_VOLTAGE 5.0f
 
-// External delay assuming you kept your SysTick delay implementation
 extern void delay(uint32_t ms);
 
+
+
 int main(void) {
+    // 1. Initialize the system clock to 48MHz
     Clock_InitSystem(SYS_CLK_48MHZ_FIRC);
 
-    // Init UART for Serial Monitor (115200 Baud)
+    // 2. Power up Port C (Required to access the Potentiometer pin PTC14)
+    Clock_EnablePort(PORT_B);
+
+    // 3. Initialize UART at 115200 baud rate for the serial monitor
     UART_Begin(115200);
     delay(100);
 
-    UART_Println("======================================");
-    UART_Println("LPSPI0 Physical Loopback Test Starting");
-    UART_Println("Ensure jumper connects PTB15 to PTB16");
-    UART_Println("======================================");
+    // 4. Initialize the ADC in standard blocking mode
+    ADC_Begin();
 
-    // Initialize SPI0 at 1MHz
-    SPI_Begin(SPI_1, SPI_SPEED_1MHZ);
 
-    uint8_t counter = 0;
 
     while(1) {
-        UART_Print("Sending byte: ");
-        UART_PrintInt(counter);
+        // Read the 12-bit analog value from the on-board potentiometer (0 - 4095)
+        uint16_t pot_value = analogRead(PIN_A0);
 
-        // Send byte over MOSI, immediately read what comes back on MISO
-        uint8_t received = SPI_Transfer(SPI_1, counter);
+        float voltage = ((float)pot_value / 4095)* VREF_VOLTAGE ;
 
-        UART_Print(" | Received: ");
-        UART_PrintInt(received);
+        // Print the value to the UART terminal
+        UART_Print("Raw Value: ");
+        UART_PrintInt(pot_value);
+        UART_Print(",");
+        UART_Print("Voltage Value: ");
+        UART_PrintFloat(voltage, 2);
+        UART_Println("");
 
-        if (received == counter) {
-            UART_Println(" [PASS]");
-        } else {
-            UART_Println(" [FAIL - Check Jumper Wire]");
-        }
-
-        counter++;
-        delay(1000); // 1 second delay between tests
+        // Wait 100 milliseconds before the next reading (10 readings per second)
+        delay(250);
     }
 }

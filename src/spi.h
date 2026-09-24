@@ -31,4 +31,5 @@ uint8_t SPI_Transfer(SPI_Module_t spi_num, uint8_t data);
 
 void SPI_TransferBulk(SPI_Module_t spi_num, uint8_t *tx_data, uint8_t *rx_data, uint32_t length);
 
+void SPI_TransferBulk_DMA(SPI_Module_t spi_num, uint8_t *tx_data, uint8_t *rx_data, uint16_t length, uint8_t tx_dma_ch, uint8_t rx_dma_ch);
 #endif /* SPI_H_ */
