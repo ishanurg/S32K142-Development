@@ -14,7 +14,7 @@ int main(void) {
     Clock_InitSystem(SYS_CLK_48MHZ_FIRC);
 
     // 2. Power up Port C (Required to access the Potentiometer pin PTC14)
-    Clock_EnablePort(PORT_B);
+    Clock_EnablePort(PORT_C);
 
     // 3. Initialize UART at 115200 baud rate for the serial monitor
     UART_Begin(115200);
@@ -27,7 +27,7 @@ int main(void) {
 
     while(1) {
         // Read the 12-bit analog value from the on-board potentiometer (0 - 4095)
-        uint16_t pot_value = analogRead(PIN_A0);
+        uint16_t pot_value = analogRead(PIN_POT);
 
         float voltage = ((float)pot_value / 4095)* VREF_VOLTAGE ;
 
