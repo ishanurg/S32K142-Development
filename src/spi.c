@@ -78,24 +78,24 @@ void SPI_TransferBulk(SPI_Module_t spi_num, uint8_t *tx_data, uint8_t *rx_data, 
     }
 }
 
-void SPI_TransferBulk_DMA(SPI_Module_t spi_num, uint8_t *tx_data, uint8_t *rx_data, uint16_t length, uint8_t tx_dma_ch, uint8_t rx_dma_ch) {
-    LPSPI_Type *spi_reg = (spi_num == SPI_0) ? IP_LPSPI0 : IP_LPSPI1;
-    uint8_t tx_req = (spi_num == SPI_0) ? DMA_REQ_LPSPI0_TX : DMA_REQ_LPSPI1_TX;
-    uint8_t rx_req = (spi_num == SPI_0) ? DMA_REQ_LPSPI0_RX : DMA_REQ_LPSPI1_RX;
-
-    // Reset FIFOs before DMA transfer
-    spi_reg->CR |= LPSPI_CR_RTF_MASK | LPSPI_CR_RRF_MASK;
-
-    // Setup RX Channel (Priority: Must be armed first)
-    if (rx_data) {
-        DMA_ConfigChannel(rx_dma_ch, rx_req, (uint32_t)&spi_reg->RDR, (uint32_t)rx_data, length, DMA_SIZE_8BIT, 0, 1);
-    }
-
-    // Setup TX Channel
-    if (tx_data) {
-        DMA_ConfigChannel(tx_dma_ch, tx_req, (uint32_t)tx_data, (uint32_t)&spi_reg->TDR, length, DMA_SIZE_8BIT, 1, 0);
-    }
-
-    // Enable LPSPI Hardware DMA Requests[cite: 11]
-    spi_reg->DER = LPSPI_DER_TDDE_MASK | LPSPI_DER_RDDE_MASK;
-}
+//void SPI_TransferBulk_DMA(SPI_Module_t spi_num, uint8_t *tx_data, uint8_t *rx_data, uint16_t length, uint8_t tx_dma_ch, uint8_t rx_dma_ch) {
+//    LPSPI_Type *spi_reg = (spi_num == SPI_0) ? IP_LPSPI0 : IP_LPSPI1;
+//    uint8_t tx_req = (spi_num == SPI_0) ? DMA_REQ_LPSPI0_TX : DMA_REQ_LPSPI1_TX;
+//    uint8_t rx_req = (spi_num == SPI_0) ? DMA_REQ_LPSPI0_RX : DMA_REQ_LPSPI1_RX;
+//
+//    // Reset FIFOs before DMA transfer
+//    spi_reg->CR |= LPSPI_CR_RTF_MASK | LPSPI_CR_RRF_MASK;
+//
+//    // Setup RX Channel (Priority: Must be armed first)
+//    if (rx_data) {
+//        DMA_ConfigChannel(rx_dma_ch, rx_req, (uint32_t)&spi_reg->RDR, (uint32_t)rx_data, length, DMA_SIZE_8BIT, 0, 1);
+//    }
+//
+//    // Setup TX Channel
+//    if (tx_data) {
+//        DMA_ConfigChannel(tx_dma_ch, tx_req, (uint32_t)tx_data, (uint32_t)&spi_reg->TDR, length, DMA_SIZE_8BIT, 1, 0);
+//    }
+//
+//    // Enable LPSPI Hardware DMA Requests[cite: 11]
+//    spi_reg->DER = LPSPI_DER_TDDE_MASK | LPSPI_DER_RDDE_MASK;
+//}

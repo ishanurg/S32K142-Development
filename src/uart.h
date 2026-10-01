@@ -37,5 +37,5 @@ void UART_PrintInt(int32_t num);
 // Print a decimal number with a specific number of decimal places
 void UART_PrintFloat(float num, uint8_t decimal_places);
 
-void UART_Print_DMA(const char *str, uint16_t length, uint8_t dma_channel);
+//void UART_Print_DMA(const char *str, uint16_t length, uint8_t dma_channel);
 #endif /* UART_H_ */

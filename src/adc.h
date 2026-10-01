@@ -35,6 +35,6 @@ void analogReadClock(ADC_ClockSource_t clk, ADC_ClockDivider_t div);
 uint16_t analogRead(Port_t port, uint8_t pin);
 
 // UPDATED: Now uses a volatile uint32_t pointer for full register extraction
-void analogRead_Start_DMA(Port_t port, uint8_t pin, volatile uint32_t *result_var, uint8_t dma_channel);
+//void analogRead_Start_DMA(Port_t port, uint8_t pin, volatile uint32_t *result_var, uint8_t dma_channel);
 
 #endif /* ADC_H */

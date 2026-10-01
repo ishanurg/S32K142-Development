@@ -4,8 +4,11 @@
 
 # Add inputs and outputs from these tool invocations to the build variables 
 C_SRCS += \
+../src/adc.c \
+../src/bme680_spi.c \
 ../src/clock.c \
 ../src/delay.c \
+../src/dma.c \
 ../src/gpio.c \
 ../src/i2c.c \
 ../src/main.c \
@@ -13,8 +16,11 @@ C_SRCS += \
 ../src/uart.c 
 
 OBJS += \
+./src/adc.o \
+./src/bme680_spi.o \
 ./src/clock.o \
 ./src/delay.o \
+./src/dma.o \
 ./src/gpio.o \
 ./src/i2c.o \
 ./src/main.o \
@@ -22,8 +28,11 @@ OBJS += \
 ./src/uart.o 
 
 C_DEPS += \
+./src/adc.d \
+./src/bme680_spi.d \
 ./src/clock.d \
 ./src/delay.d \
+./src/dma.d \
 ./src/gpio.d \
 ./src/i2c.d \
 ./src/main.d \
@@ -35,7 +44,7 @@ C_DEPS += \
 src/%.o: ../src/%.c
 	@echo 'Building file: $<'
 	@echo 'Invoking: Standard S32DS C Compiler'
-	arm-none-eabi-gcc "@src/clock.args" -MMD -MP -MF"$(@:%.o=%.d)" -MT"$@" -o "$@" "$<"
+	arm-none-eabi-gcc "@src/adc.args" -MMD -MP -MF"$(@:%.o=%.d)" -MT"$@" -o "$@" "$<"
 	@echo 'Finished building: $<'
 	@echo ' '
 

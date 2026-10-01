@@ -125,9 +125,9 @@ void UART_PrintFloat(float num, uint8_t decimal_places) {
         decimal_places--;
     }
 }
-
-void UART_Print_DMA(const char *str, uint16_t length, uint8_t dma_channel) {
-    // Note: LPUART_BAUD_TDMAE_MASK is globally enabled in UART_Begin.
-    // Transmits buffer completely in the background.
-    DMA_ConfigChannel(dma_channel, DMA_REQ_LPUART1_TX, (uint32_t)str, (uint32_t)&IP_LPUART1->DATA, length, DMA_SIZE_8BIT, 1, 0);
-}
+//
+//void UART_Print_DMA(const char *str, uint16_t length, uint8_t dma_channel) {
+//    // Note: LPUART_BAUD_TDMAE_MASK is globally enabled in UART_Begin.
+//    // Transmits buffer completely in the background.
+//    DMA_ConfigChannel(dma_channel, DMA_REQ_LPUART1_TX, (uint32_t)str, (uint32_t)&IP_LPUART1->DATA, length, DMA_SIZE_8BIT, 1, 0);
+//}

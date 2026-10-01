@@ -103,18 +103,18 @@ uint16_t analogRead(Port_t port, uint8_t pin) {
     return (uint16_t)(IP_ADC0->R[0]);
 }
 
-void analogRead_Start_DMA(Port_t port, uint8_t pin, volatile uint32_t *result_var, uint8_t dma_channel) {
-    uint8_t channel = get_adc_channel(port, pin);
-    if (channel == 0xFF) return;
-
-    pinMux(port, pin, 0);
-
-    IP_ADC0->SC3 &= ~ADC_SC3_ADCO_MASK;
-    IP_ADC0->SC2 &= ~ADC_SC2_DMAEN_MASK;
-
-    // 32-bit DMA transfer matches the physical system bus width of the ADC register
-    DMA_ConfigChannel(dma_channel, DMA_REQ_ADC0, (uint32_t)&IP_ADC0->R[0], (uint32_t)result_var, 4, DMA_SIZE_32BIT, 0, 0);
-
-    IP_ADC0->SC2 |= ADC_SC2_DMAEN_MASK;
-    IP_ADC0->SC1[0] = ADC_SC1_ADCH(channel);
-}
+//void analogRead_Start_DMA(Port_t port, uint8_t pin, volatile uint32_t *result_var, uint8_t dma_channel) {
+//    uint8_t channel = get_adc_channel(port, pin);
+//    if (channel == 0xFF) return;
+//
+//    pinMux(port, pin, 0);
+//
+//    IP_ADC0->SC3 &= ~ADC_SC3_ADCO_MASK;
+//    IP_ADC0->SC2 &= ~ADC_SC2_DMAEN_MASK;
+//
+//    // 32-bit DMA transfer matches the physical system bus width of the ADC register
+//    DMA_ConfigChannel(dma_channel, DMA_REQ_ADC0, (uint32_t)&IP_ADC0->R[0], (uint32_t)result_var, 4, DMA_SIZE_32BIT, 0, 0);
+//
+//    IP_ADC0->SC2 |= ADC_SC2_DMAEN_MASK;
+//    IP_ADC0->SC1[0] = ADC_SC1_ADCH(channel);
+//}
