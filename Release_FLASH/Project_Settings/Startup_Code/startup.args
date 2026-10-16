@@ -1,0 +1,10 @@
+-DCPU_S32K142
+-I"C:/Users/User/Downloads/S32K142-Development-main/S32K142-Development-main/include"
+-O3
+-Wall
+-c
+-fmessage-length=0
+-ffunction-sections
+-fdata-sections
+-mcpu=cortex-m4
+-specs=rdimon.specs

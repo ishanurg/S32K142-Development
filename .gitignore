@@ -1,0 +1,29 @@
+# Build artifacts
+Debug/
+Release/
+*.o
+*.d
+*.elf
+*.map
+*.bin
+*.hex
+*.mot
+*.srec
+*.a
+
+# NXP / S32 Design Studio / J-Link specific
+.metadata/
+*.launch
+JLinkLog.txt
+.jlink/
+
+# VS Code specific caches (keeps settings.json, launch.json, etc.)
+.vscode/ipch/
+*.code-workspace
+.vscode/*.db
+.vscode/*.db-shm
+.vscode/*.db-wal
+
+# OS generated files
+.DS_Store
+Thumbs.db

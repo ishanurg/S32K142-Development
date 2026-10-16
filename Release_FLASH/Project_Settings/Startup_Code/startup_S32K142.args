@@ -1,0 +1,6 @@
+-c
+-I"C:/Users/User/Downloads/S32K142-Development-main/S32K142-Development-main/include"
+-x assembler-with-cpp
+-DSTART_FROM_FLASH
+-mcpu=cortex-m4
+-specs=rdimon.specs
